@@ -1,112 +1,50 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
-import { useCartStore } from "@/stores/cartStore";
+import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useCartStore, CartItem } from "@/stores/cartStore";
 import { toast } from "sonner";
-import productClassic from "@/assets/product-classic.png";
-
-const products = [
-  {
-    id: 1,
-    name: "Classic Lime",
-    image: productClassic,
-    color: "border-secondary",
-    rotate: -3,
-    available: true,
-  },
-  {
-    id: 2,
-    name: "Watermelon Jalapeño",
-    image: productClassic,
-    color: "border-primary",
-    rotate: 2,
-    available: true,
-  },
-  {
-    id: 3,
-    name: "Strawberry",
-    image: productClassic,
-    color: "border-accent",
-    rotate: -2,
-    available: true,
-  },
-];
-
-const comingSoon = [
-  { name: "Passionfruit Guava", color: "border-sunshine" },
-  { name: "Tropical", color: "border-primary" },
-  { name: "Blueberry Mint", color: "border-secondary" },
-];
+import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 
 export const ProductSection = () => {
-  const [selectedPackSize, setSelectedPackSize] = useState<"4-pack" | "12-pack">("4-pack");
+  const navigate = useNavigate();
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { addItem, setIsCartOpen } = useCartStore();
 
-  const handleAddToCart = (product: typeof products[0]) => {
-    // Create a proper cart item with mock Shopify structure
-    const price = selectedPackSize === "4-pack" ? "18.99" : "54.99";
-    const cartItem = {
-      product: {
-        node: {
-          id: `gid://shopify/Product/${product.id}`,
-          title: product.name,
-          description: "Refreshing non-alcoholic mocktail",
-          handle: product.name.toLowerCase().replace(/\s+/g, '-'),
-          priceRange: {
-            minVariantPrice: {
-              amount: price,
-              currencyCode: "USD"
-            }
-          },
-          images: {
-            edges: [{
-              node: {
-                url: product.image,
-                altText: product.name
-              }
-            }]
-          },
-          variants: {
-            edges: [{
-              node: {
-                id: `gid://shopify/ProductVariant/${product.id}-${selectedPackSize}`,
-                title: selectedPackSize,
-                price: {
-                  amount: price,
-                  currencyCode: "USD"
-                },
-                availableForSale: true,
-                selectedOptions: [{
-                  name: "Pack Size",
-                  value: selectedPackSize
-                }]
-              }
-            }]
-          },
-          options: [{
-            name: "Pack Size",
-            values: ["4-pack", "12-pack"]
-          }]
-        }
-      },
-      variantId: `gid://shopify/ProductVariant/${product.id}-${selectedPackSize}`,
-      variantTitle: selectedPackSize,
-      price: {
-        amount: price,
-        currencyCode: "USD"
-      },
-      quantity: 1,
-      selectedOptions: [{
-        name: "Pack Size",
-        value: selectedPackSize
-      }]
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const fetchedProducts = await fetchProducts(20);
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        toast.error("Failed to load products");
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    // Add to cart
+    loadProducts();
+  }, []);
+
+  const handleAddToCart = (product: ShopifyProduct) => {
+    const firstVariant = product.node.variants.edges[0].node;
+    
+    const cartItem: CartItem = {
+      product,
+      variantId: firstVariant.id,
+      variantTitle: firstVariant.title,
+      price: firstVariant.price,
+      quantity: 1,
+      selectedOptions: firstVariant.selectedOptions || []
+    };
+    
     addItem(cartItem);
 
-    // Confetti burst
     confetti({
       particleCount: 100,
       spread: 70,
@@ -115,12 +53,39 @@ export const ProductSection = () => {
     });
 
     toast.success("Added to cart!", {
-      description: `${product.name} ${selectedPackSize} added to your cart`,
+      description: `${product.node.title} added to your cart!`,
     });
 
-    // Open the cart drawer
     setIsCartOpen(true);
   };
+
+  if (isLoading) {
+    return (
+      <section className="py-24 px-4 bg-background relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-7xl md:text-9xl font-black text-center mb-20 text-foreground"
+          >
+            THE FLOCK
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {[...Array(3)].map((_, i) => (
+              <Card key={i} className="overflow-hidden">
+                <Skeleton className="h-64 w-full" />
+                <div className="p-6">
+                  <Skeleton className="h-6 w-3/4 mb-4" />
+                  <Skeleton className="h-20 w-full" />
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 px-4 bg-background relative overflow-hidden">
@@ -135,91 +100,64 @@ export const ProductSection = () => {
           THE FLOCK
         </motion.h2>
 
-        {/* Product Grid - Polaroid Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-24">
-          {products.map((product, i) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 50, rotate: 0 }}
-              whileInView={{ opacity: 1, y: 0, rotate: product.rotate }}
-              whileHover={{
-                scale: 1.05,
-                rotate: 0,
-                transition: { duration: 0.2 },
-              }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`bg-white p-6 pb-12 shadow-2xl ${product.color} border-8 cursor-pointer`}
-              style={{
-                boxShadow: "8px 8px 0px rgba(0,0,0,0.2)",
-              }}
-            >
-              <div className="bg-muted aspect-square flex items-center justify-center mb-6 overflow-hidden relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <h3 className="text-3xl font-black text-foreground mb-4 text-center">
-                {product.name}
-              </h3>
-              
-              {/* Pack Size Selector */}
-              <div className="flex gap-2 mb-4">
-                <Button
-                  variant={selectedPackSize === "4-pack" ? "default" : "outline"}
-                  onClick={() => setSelectedPackSize("4-pack")}
-                  className="flex-1 font-bold border-2 border-foreground"
-                >
-                  4-Pack
-                  <br />
-                  $14.99
-                </Button>
-                <Button
-                  variant={selectedPackSize === "12-pack" ? "default" : "outline"}
-                  onClick={() => setSelectedPackSize("12-pack")}
-                  className="flex-1 font-bold border-2 border-foreground"
-                >
-                  12-Pack
-                  <br />
-                  $44.99
-                </Button>
-              </div>
-              
-              <Button
-                onClick={() => handleAddToCart(product)}
-                className="w-full bg-primary hover:bg-primary/90 text-white font-black text-xl py-6 rounded-full border-4 border-foreground shadow-lg hover:scale-105 transition-transform"
-              >
-                GRAB IT
-              </Button>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Coming Soon */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h3 className="text-5xl font-black text-foreground mb-8">
-            COMING SOON 🎉
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {comingSoon.map((item, i) => (
+        {products.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-xl text-muted-foreground">
+              No products available yet. Check back soon!
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {products.map((product, i) => (
               <motion.div
-                key={i}
-                whileHover={{ scale: 1.1, rotate: 0 }}
-                className={`bg-muted ${item.color} border-4 px-8 py-4 rounded-full font-black text-2xl shadow-lg`}
-                style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }}
+                key={product.node.id}
+                initial={{ opacity: 0, y: 50, rotate: 0 }}
+                whileInView={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2 }}
+                whileHover={{
+                  scale: 1.05,
+                  rotate: 0,
+                  transition: { duration: 0.2 },
+                }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-6 pb-12 shadow-2xl border-secondary border-8 cursor-pointer"
+                style={{
+                  boxShadow: "8px 8px 0px rgba(0,0,0,0.2)",
+                }}
+                onClick={() => navigate(`/product/${product.node.handle}`)}
               >
-                {item.name}
+                <div className="bg-muted aspect-square flex items-center justify-center mb-6 overflow-hidden relative">
+                  {product.node.images.edges[0]?.node ? (
+                    <img
+                      src={product.node.images.edges[0].node.url}
+                      alt={product.node.images.edges[0].node.altText || product.node.title}
+                      className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
+                    />
+                  ) : (
+                    <span className="text-6xl">📦</span>
+                  )}
+                </div>
+                <h3 className="text-3xl font-black text-foreground mb-4 text-center">
+                  {product.node.title}
+                </h3>
+                
+                <p className="text-lg font-semibold text-primary text-center mb-4">
+                  {product.node.priceRange.minVariantPrice.currencyCode} {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
+                </p>
+
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart(product);
+                  }}
+                  className="w-full bg-foreground text-background hover:bg-foreground/90 font-black text-lg"
+                >
+                  GRAB NOW 🦆
+                </Button>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        )}
       </div>
     </section>
   );

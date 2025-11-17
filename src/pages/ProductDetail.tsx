@@ -28,6 +28,7 @@ import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore, CartItem } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
+import { FloatingCartBadge } from "@/components/FloatingCartBadge";
 
 const ProductDetail = () => {
   const { handle } = useParams();
@@ -140,6 +141,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <FloatingCartBadge />
 
       {/* Sticky Add to Cart Bar - Mobile Only */}
       {product && showStickyBar && (
