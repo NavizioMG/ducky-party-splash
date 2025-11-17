@@ -29,7 +29,6 @@ export const Footer = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="text-8xl mb-6 bounce-float">🌊</div>
             <h3 className="text-5xl font-black mb-6">JOIN THE FLOCK</h3>
             <p className="text-2xl mb-8 font-bold">
               Get exclusive drops, wild deals, and questionable duck facts

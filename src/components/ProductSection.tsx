@@ -58,14 +58,6 @@ export const ProductSection = () => {
 
   return (
     <section className="py-24 px-4 bg-background relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-10 right-10 text-8xl opacity-20 bounce-float">
-        🌊
-      </div>
-      <div className="absolute bottom-20 left-10 text-8xl opacity-20 bounce-float" style={{ animationDelay: "1s" }}>
-        🍹
-      </div>
-
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, x: -50 }}
