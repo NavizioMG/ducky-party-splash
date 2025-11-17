@@ -32,7 +32,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-6xl md:text-8xl lg:text-9xl font-black text-foreground mb-8 leading-none"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-foreground mb-6 sm:mb-8 leading-tight sm:leading-none px-4"
           style={{
             textShadow: "4px 4px 0px rgba(0,0,0,0.2)",
             transform: "rotate(-2deg)",
@@ -50,20 +50,20 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-4 w-full max-w-2xl mx-auto"
         >
           <Button
             size="lg"
-            className="text-2xl font-black py-8 px-12 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
+            className="text-lg sm:text-2xl font-black py-6 sm:py-8 px-8 sm:px-12 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 w-full sm:w-auto"
           >
             QUACK ONE OPEN
           </Button>
           <Button
             size="lg"
             variant="outline"
-            className="text-2xl font-black py-8 px-12 rounded-full border-4 border-foreground bg-background hover:bg-secondary transition-all hover:scale-105 shadow-lg"
+            className="text-lg sm:text-2xl font-black py-6 sm:py-8 px-8 sm:px-12 rounded-full border-4 border-foreground bg-background hover:bg-secondary transition-all hover:scale-105 shadow-lg w-full sm:w-auto"
           >
-            <MapPin className="mr-2" />
+            <MapPin className="mr-2 w-5 h-5 sm:w-6 sm:h-6" />
             FIND NEAR YOU
           </Button>
         </motion.div>
@@ -73,7 +73,7 @@ export const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
-          className="flex flex-wrap justify-center gap-4"
+          className="flex flex-wrap justify-center gap-3 sm:gap-4 px-4"
         >
           {[
             { text: "0% BOOZE", color: "bg-primary", rotate: -3 },
@@ -83,7 +83,7 @@ export const Hero = () => {
             <motion.div
               key={i}
               whileHover={{ scale: 1.1, rotate: 0 }}
-              className={`${badge.color} text-foreground font-black text-xl px-8 py-4 rounded-full shadow-lg border-4 border-foreground`}
+              className={`${badge.color} text-foreground font-black text-base sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg border-4 border-foreground`}
               style={{ transform: `rotate(${badge.rotate}deg)` }}
             >
               {badge.text}

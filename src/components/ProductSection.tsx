@@ -88,7 +88,7 @@ export const ProductSection = () => {
                 boxShadow: "8px 8px 0px rgba(0,0,0,0.2)",
               }}
             >
-              <div className="bg-muted aspect-square flex items-center justify-center mb-6 overflow-hidden">
+              <div className="bg-muted aspect-square flex items-center justify-center mb-6 overflow-hidden relative">
                 <img
                   src={product.image}
                   alt={product.name}

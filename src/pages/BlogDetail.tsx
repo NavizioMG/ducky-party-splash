@@ -27,10 +27,10 @@ export default function BlogDetail() {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-8 md:py-16">
         {/* Back Button */}
         <Link to="/blog">
-          <Button variant="outline" className="mb-8 font-bold border-2">
+          <Button variant="outline" className="mb-6 md:mb-8 font-bold border-2">
             <ArrowLeft className="mr-2 w-4 h-4" /> Back to Blog
           </Button>
         </Link>
@@ -41,21 +41,21 @@ export default function BlogDetail() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl mx-auto"
         >
-          <Badge className="mb-4 text-base py-1 px-4">
+          <Badge className="mb-3 md:mb-4 text-sm md:text-base py-1 px-3 md:px-4">
             {article.category}
           </Badge>
           
-          <h1 className="text-5xl md:text-7xl font-black mb-6 text-foreground">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black mb-4 md:mb-6 text-foreground leading-tight">
             {article.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 mb-8 text-foreground/70 font-bold">
+          <div className="flex flex-wrap items-center gap-3 md:gap-6 mb-6 md:mb-8 text-sm md:text-base text-foreground/70 font-bold">
             <span className="flex items-center gap-2">
-              <User className="w-5 h-5" />
+              <User className="w-4 h-4 md:w-5 md:h-5" />
               {article.author}
             </span>
             <span className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
+              <Calendar className="w-4 h-4 md:w-5 md:h-5" />
               {new Date(article.date).toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
@@ -63,19 +63,19 @@ export default function BlogDetail() {
               })}
             </span>
             <span className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
+              <Clock className="w-4 h-4 md:w-5 md:h-5" />
               {article.readTime}
             </span>
           </div>
 
           {/* Share Button */}
-          <Button variant="outline" className="mb-8 font-bold border-2">
+          <Button variant="outline" className="mb-6 md:mb-8 font-bold border-2 text-sm md:text-base">
             <Share2 className="mr-2 w-4 h-4" /> Share Article
           </Button>
 
           {/* Featured Image */}
-          <div className="aspect-video bg-primary/20 border-4 border-foreground rounded-3xl mb-12 flex items-center justify-center">
-            <span className="text-9xl">🦆</span>
+          <div className="aspect-video bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 border-4 border-foreground rounded-2xl md:rounded-3xl mb-8 md:mb-12 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full bg-muted/50"></div>
           </div>
 
           {/* Article Content */}
@@ -83,21 +83,21 @@ export default function BlogDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="prose prose-lg max-w-none"
+            className="prose prose-sm md:prose-lg max-w-none"
           >
             <div 
-              className="text-foreground space-y-6 font-bold text-lg leading-relaxed"
+              className="text-foreground space-y-4 md:space-y-6 font-bold text-base md:text-lg leading-relaxed"
               dangerouslySetInnerHTML={{ 
                 __html: article.content
-                  .replace(/^# /gm, '<h1 class="text-5xl font-black mb-6 mt-12 text-foreground">')
-                  .replace(/\n# /g, '</h1>\n<h1 class="text-5xl font-black mb-6 mt-12 text-foreground">')
-                  .replace(/^## /gm, '<h2 class="text-4xl font-black mb-4 mt-8 text-foreground">')
-                  .replace(/\n## /g, '</h2>\n<h2 class="text-4xl font-black mb-4 mt-8 text-foreground">')
-                  .replace(/^### /gm, '<h3 class="text-3xl font-black mb-3 mt-6 text-primary">')
-                  .replace(/\n### /g, '</h3>\n<h3 class="text-3xl font-black mb-3 mt-6 text-primary">')
+                  .replace(/^# /gm, '<h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 mt-8 md:mt-12 text-foreground">')
+                  .replace(/\n# /g, '</h1>\n<h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 mt-8 md:mt-12 text-foreground">')
+                  .replace(/^## /gm, '<h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-3 md:mb-4 mt-6 md:mt-8 text-foreground">')
+                  .replace(/\n## /g, '</h2>\n<h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-3 md:mb-4 mt-6 md:mt-8 text-foreground">')
+                  .replace(/^### /gm, '<h3 class="text-xl md:text-2xl lg:text-3xl font-black mb-2 md:mb-3 mt-4 md:mt-6 text-primary">')
+                  .replace(/\n### /g, '</h3>\n<h3 class="text-xl md:text-2xl lg:text-3xl font-black mb-2 md:mb-3 mt-4 md:mt-6 text-primary">')
                   .replace(/\*\*(.+?)\*\*/g, '<strong class="text-primary">$1</strong>')
-                  .replace(/\n\n/g, '</p><p class="mb-4">')
-                  .replace(/^(?!<[h|p])/gm, '<p class="mb-4">')
+                  .replace(/\n\n/g, '</p><p class="mb-3 md:mb-4">')
+                  .replace(/^(?!<[h|p])/gm, '<p class="mb-3 md:mb-4">')
                   .replace(/(?<!>)$/gm, '</p>')
               }}
             />
@@ -108,18 +108,18 @@ export default function BlogDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-16 p-8 bg-secondary/10 border-4 border-foreground rounded-3xl"
+            className="mt-12 md:mt-16 p-6 md:p-8 bg-secondary/10 border-4 border-foreground rounded-2xl md:rounded-3xl"
           >
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 rounded-full bg-primary/20 border-4 border-foreground flex items-center justify-center text-4xl">
-                🦆
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/20 border-4 border-foreground flex items-center justify-center text-3xl md:text-4xl flex-shrink-0">
+                👤
               </div>
-              <div>
-                <h3 className="text-2xl font-black mb-2 text-foreground">
+              <div className="text-center sm:text-left">
+                <h3 className="text-xl md:text-2xl font-black mb-2 text-foreground">
                   {article.author}
                 </h3>
-                <p className="font-bold text-foreground/70">
-                  Part of the Rubber Ducky Drink Co. flock, spreading refreshment and good vibes one article at a time!
+                <p className="text-sm md:text-base font-bold text-foreground/70">
+                  Part of the Rubber Ducky Drink Co. team, spreading refreshment and good vibes one article at a time!
                 </p>
               </div>
             </div>
@@ -131,29 +131,30 @@ export default function BlogDetail() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-20"
+          className="mt-12 md:mt-20"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-8 text-center text-foreground">
-            MORE FROM THE BLOG 🦆
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 md:mb-8 text-center text-foreground">
+            MORE FROM THE BLOG
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
             {relatedArticles.map((related) => (
               <Link key={related.id} to={`/blog/${related.id}`}>
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-secondary/10 border-4 border-foreground rounded-3xl overflow-hidden h-full flex flex-col"
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.2 }}
+                  className="bg-secondary/10 border-4 border-foreground rounded-2xl md:rounded-3xl overflow-hidden h-full flex flex-col"
                 >
-                  <div className="aspect-video bg-primary/20 flex items-center justify-center border-b-4 border-foreground">
-                    <span className="text-6xl">🦆</span>
+                  <div className="aspect-video bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 flex items-center justify-center border-b-4 border-foreground">
+                    <div className="w-full h-full bg-muted/50"></div>
                   </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <Badge className="w-fit mb-3">
+                  <div className="p-4 md:p-6 flex flex-col flex-grow">
+                    <Badge className="w-fit mb-2 md:mb-3 text-xs md:text-sm">
                       {related.category}
                     </Badge>
-                    <h3 className="text-xl font-black mb-3 text-foreground">
+                    <h3 className="text-lg md:text-xl font-black mb-2 md:mb-3 text-foreground line-clamp-2">
                       {related.title}
                     </h3>
-                    <p className="text-sm font-bold text-foreground/70 flex-grow">
+                    <p className="text-xs md:text-sm font-bold text-foreground/70 flex-grow line-clamp-3">
                       {related.excerpt}
                     </p>
                   </div>

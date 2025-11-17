@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { 
   ArrowLeft, 
   ShoppingCart, 
@@ -38,6 +38,8 @@ const ProductDetail = () => {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 3;
   const addItem = useCartStore(state => state.addItem);
 
   useEffect(() => {
@@ -440,7 +442,7 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* Product Details Tabs */}
+      {/* Product Details Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
@@ -450,101 +452,113 @@ const ProductDetail = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <Tabs defaultValue="description" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 h-auto p-2 border-2 border-foreground">
-                <TabsTrigger value="description" className="text-lg font-bold py-3">
-                  Description
-                </TabsTrigger>
-                <TabsTrigger value="ingredients" className="text-lg font-bold py-3">
-                  Ingredients
-                </TabsTrigger>
-                <TabsTrigger value="howto" className="text-lg font-bold py-3">
-                  How to Enjoy
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="description" className="mt-6 space-y-4">
-                <div className="bg-background rounded-xl border-4 border-foreground p-8">
-                  <h3 className="text-2xl font-black mb-4">About This Drink</h3>
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {product.node.description || "A refreshing non-alcoholic beverage from Rubber Ducky Drink Co! Perfect for any occasion, our drinks are crafted with care to deliver maximum flavor and refreshment."}
+            <h2 className="text-3xl md:text-4xl font-black text-center mb-8">
+              PRODUCT DETAILS
+            </h2>
+            <Accordion type="single" collapsible defaultValue="description" className="w-full">
+              <AccordionItem value="description" className="border-4 border-foreground rounded-xl mb-4 overflow-hidden bg-background">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-lg md:text-xl hover:bg-muted/50">
+                  📝 DESCRIPTION
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    <p>
+                      Get ready to party without the hangover! Our non-alcoholic margarita is the perfect blend of zesty lime, 
+                      natural sweetness, and that signature margarita tang you love - minus the tequila.
                     </p>
-                    <p className="text-muted-foreground leading-relaxed mt-4">
-                      Whether you're hosting a party, relaxing by the pool, or just want something delicious to sip on, Rubber Ducky drinks are your perfect companion. Zero alcohol means you can enjoy them anytime, anywhere!
+                    <p>
+                      Made with premium ingredients and zero sugar, this refreshing beverage delivers all the flavor and fun 
+                      of a classic margarita in a convenient ready-to-drink format. Whether you're the designated driver, 
+                      pregnant, health-conscious, or just taking a break from alcohol, you don't have to miss out on the celebration!
+                    </p>
+                    <p className="font-bold text-foreground">
+                      Perfect for: Pool parties, game nights, celebrations, or any time you want a refreshing treat!
                     </p>
                   </div>
-                </div>
-              </TabsContent>
+                </AccordionContent>
+              </AccordionItem>
               
-              <TabsContent value="ingredients" className="mt-6">
-                <div className="bg-background rounded-xl border-4 border-foreground p-8">
-                  <h3 className="text-2xl font-black mb-4">What's Inside</h3>
-                  <ul className="space-y-2 text-lg">
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary text-2xl">•</span>
-                      <span>Carbonated Water</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary text-2xl">•</span>
-                      <span>Natural Lime Flavor</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary text-2xl">•</span>
-                      <span>Citric Acid</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary text-2xl">•</span>
-                      <span>Natural Sweeteners</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-primary text-2xl">•</span>
-                      <span>A Splash of Magic ✨</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6 p-4 bg-muted rounded-lg">
-                    <p className="text-sm font-bold">Nutrition Facts (per 12 fl oz):</p>
-                    <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
-                      <span>Calories: 10</span>
-                      <span>Sugar: 0g</span>
-                      <span>Carbs: 2g</span>
-                      <span>Sodium: 15mg</span>
+              <AccordionItem value="ingredients" className="border-4 border-foreground rounded-xl mb-4 overflow-hidden bg-background">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-lg md:text-xl hover:bg-muted/50">
+                  🌿 INGREDIENTS
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      We believe in keeping it real! Our drinks are made with simple, natural ingredients you can feel good about:
+                    </p>
+                    <ul className="space-y-3 text-muted-foreground">
+                      <li className="flex items-start gap-3">
+                        <span className="text-primary text-2xl">•</span>
+                        <span>Carbonated Water</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-primary text-2xl">•</span>
+                        <span>Natural Lime Flavor</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-primary text-2xl">•</span>
+                        <span>Organic Agave Extract</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-primary text-2xl">•</span>
+                        <span>Natural Citrus Extracts</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-primary text-2xl">•</span>
+                        <span>Sea Salt</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-primary text-2xl">•</span>
+                        <span>A Splash of Magic ✨</span>
+                      </li>
+                    </ul>
+                    <div className="mt-6 p-4 bg-muted rounded-lg border-2 border-foreground">
+                      <p className="text-sm font-bold mb-3 text-foreground">Nutrition Facts (per 12 fl oz):</p>
+                      <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
+                        <span>Calories: 10</span>
+                        <span>Sugar: 0g</span>
+                        <span>Carbs: 2g</span>
+                        <span>Sodium: 15mg</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </TabsContent>
+                </AccordionContent>
+              </AccordionItem>
               
-              <TabsContent value="howto" className="mt-6">
-                <div className="bg-background rounded-xl border-4 border-foreground p-8">
-                  <h3 className="text-2xl font-black mb-6">Serving Suggestions 🍹</h3>
+              <AccordionItem value="howto" className="border-4 border-foreground rounded-xl overflow-hidden bg-background">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-lg md:text-xl hover:bg-muted/50">
+                  🍹 HOW TO ENJOY
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
                   <div className="space-y-6">
                     <div className="border-l-4 border-primary pl-4">
-                      <h4 className="font-bold text-lg mb-2">Classic Pour</h4>
+                      <h4 className="font-bold text-lg mb-2 text-foreground">Classic Pour</h4>
                       <p className="text-muted-foreground">
                         Serve chilled over ice in your favorite glass. Garnish with a lime wedge for extra flair!
                       </p>
                     </div>
                     <div className="border-l-4 border-secondary pl-4">
-                      <h4 className="font-bold text-lg mb-2">Frozen Delight</h4>
+                      <h4 className="font-bold text-lg mb-2 text-foreground">Frozen Delight</h4>
                       <p className="text-muted-foreground">
                         Blend with ice for a slushy treat. Perfect for hot summer days!
                       </p>
                     </div>
                     <div className="border-l-4 border-accent pl-4">
-                      <h4 className="font-bold text-lg mb-2">Mocktail Magic</h4>
+                      <h4 className="font-bold text-lg mb-2 text-foreground">Mocktail Magic</h4>
                       <p className="text-muted-foreground">
                         Mix with sparkling water and fresh fruit for a fancy mocktail experience.
                       </p>
                     </div>
+                    <div className="mt-6 p-4 bg-primary/10 rounded-lg border-2 border-primary">
+                      <p className="text-sm font-bold text-center text-foreground">
+                        💡 Pro Tip: Add a salt rim for the full margarita experience!
+                      </p>
+                    </div>
                   </div>
-                  <div className="mt-6 p-4 bg-primary/10 rounded-lg border-2 border-primary">
-                    <p className="text-sm font-bold text-center">
-                      💡 Pro Tip: Add a salt rim for the full margarita experience!
-                    </p>
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </motion.div>
         </div>
       </section>
@@ -642,8 +656,37 @@ const ProductDetail = () => {
                   verified: true,
                   title: "Perfect Alternative",
                   text: "As someone who doesn't drink alcohol, finding quality alternatives can be challenging. These drinks are absolutely perfect. Great taste, fun branding, and they don't make me feel like I'm missing out at social gatherings."
+                },
+                {
+                  id: 5,
+                  author: "Amanda S.",
+                  rating: 5,
+                  date: "2023-12-20",
+                  verified: true,
+                  title: "Love These!",
+                  text: "These are my go-to drinks now! Perfect for when I want something tasty but don't want alcohol. The lime flavor is amazing and they're so convenient."
+                },
+                {
+                  id: 6,
+                  author: "Tom H.",
+                  rating: 4,
+                  date: "2023-12-15",
+                  verified: true,
+                  title: "Great Alternative",
+                  text: "Really impressed with the flavor. It's nice to have a good non-alcoholic option that doesn't taste like juice. Would recommend!"
+                },
+                {
+                  id: 7,
+                  author: "Lisa M.",
+                  rating: 5,
+                  date: "2023-12-10",
+                  verified: true,
+                  title: "Obsessed!",
+                  text: "I'm completely obsessed with these drinks! They taste amazing and I love that they're low calorie. Perfect for any occasion!"
                 }
-              ].map((review, index) => (
+              ]
+                .slice((currentPage - 1) * reviewsPerPage, currentPage * reviewsPerPage)
+                .map((review, index) => (
                 <motion.div
                   key={review.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -682,6 +725,45 @@ const ProductDetail = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Pagination */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-8 flex justify-center items-center gap-2"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                className="font-bold"
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </Button>
+              {[...Array(Math.ceil(7 / reviewsPerPage))].map((_, i) => (
+                <Button
+                  key={i}
+                  variant={currentPage === i + 1 ? "default" : "outline"}
+                  size="sm"
+                  className="font-bold w-10"
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </Button>
+              ))}
+              <Button
+                variant="outline"
+                size="sm"
+                className="font-bold"
+                onClick={() => setCurrentPage(p => Math.min(Math.ceil(7 / reviewsPerPage), p + 1))}
+                disabled={currentPage === Math.ceil(7 / reviewsPerPage)}
+              >
+                Next
+              </Button>
+            </motion.div>
 
             {/* Add Review CTA */}
             <motion.div
