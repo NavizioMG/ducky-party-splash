@@ -9,6 +9,7 @@ import { HowItsMade } from "@/components/HowItsMade";
 import { SocialProof } from "@/components/SocialProof";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { FloatingCartBadge } from "@/components/FloatingCartBadge";
 
 const Index = () => {
   useEffect(() => {
@@ -58,6 +59,7 @@ const Index = () => {
       <SocialProof />
       <Footer />
       <ScrollToTop />
+      <FloatingCartBadge />
     </div>
   );
 };
