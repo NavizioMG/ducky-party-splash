@@ -128,16 +128,9 @@ const Contact = () => {
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 text-6xl animate-bounce-float">🦆</div>
-          <div className="absolute top-20 right-20 text-5xl animate-bounce-float animation-delay-200">🦆</div>
-          <div className="absolute bottom-10 left-1/4 text-4xl animate-bounce-float animation-delay-400">🦆</div>
-          <div className="absolute top-1/3 right-1/3 text-5xl animate-bounce-float animation-delay-600">🦆</div>
-        </div>
-        
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-7xl md:text-8xl font-black mb-6 text-background drop-shadow-lg">
-            LET'S CHAT! 🦆
+            LET'S CHAT!
           </h1>
           <p className="text-2xl md:text-3xl text-background/90 font-bold max-w-3xl mx-auto">
             Questions? Ideas? Just wanna say hi? We're all ears (and beaks)!

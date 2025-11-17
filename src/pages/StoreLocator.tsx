@@ -136,12 +136,6 @@ const StoreLocator = () => {
 
       {/* Hero Section */}
       <section className="rainbow-gradient py-20 px-5 text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 text-6xl animate-bounce">🦆</div>
-          <div className="absolute top-20 right-20 text-5xl bounce-float">🦆</div>
-          <div className="absolute bottom-10 left-1/4 text-4xl tilt">🦆</div>
-          <div className="absolute bottom-20 right-1/3 text-5xl spin-slow">🦆</div>
-        </div>
         <div className="relative z-10">
           <h1 className="text-5xl md:text-7xl font-black text-foreground mb-4">
             FIND OUR DRINKS 🦆

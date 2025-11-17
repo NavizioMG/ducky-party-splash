@@ -32,17 +32,9 @@ const About = () => {
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 text-6xl animate-bounce-float">🦆</div>
-          <div className="absolute top-20 right-20 text-5xl animate-bounce-float animation-delay-200">🦆</div>
-          <div className="absolute bottom-10 left-1/4 text-4xl animate-bounce-float animation-delay-400">🦆</div>
-          <div className="absolute top-1/3 right-1/3 text-5xl animate-bounce-float animation-delay-600">🦆</div>
-          <div className="absolute bottom-20 right-1/4 text-6xl animate-bounce-float animation-delay-800">🦆</div>
-        </div>
-        
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-7xl md:text-8xl font-black mb-8 text-background drop-shadow-lg">
-            OUR RUBBER DUCKY STORY 🦆
+            OUR STORY
           </h1>
           <p className="text-2xl md:text-3xl text-background/90 font-bold max-w-4xl mx-auto leading-relaxed">
             Rubber Ducky Drink Co. was born from a simple idea: great drinks should bring joy—even without the booze.
@@ -63,18 +55,12 @@ const About = () => {
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 The rubber duck is a universal symbol of lightheartedness and fun—just like our drinks. We wanted to can that same carefree feeling: a little wink of nostalgia, a splash of sunshine, and a whole lot of flavor.
               </p>
-              <div className="mt-8 flex gap-4 text-5xl">
-                <span className="animate-bounce-float">🌊</span>
-                <span className="animate-bounce-float animation-delay-200">☀️</span>
-                <span className="animate-bounce-float animation-delay-400">🍹</span>
-              </div>
             </div>
 
             {/* Right - Product Visual */}
             <div className="relative">
               <div className="bg-gradient-to-br from-primary via-secondary to-accent rounded-3xl border-4 border-foreground shadow-2xl h-96 flex items-center justify-center rotate-[2deg] hover:rotate-0 transition-all duration-300">
                 <div className="text-center">
-                  <div className="text-8xl mb-4 animate-bounce-float">🦆</div>
                   <p className="text-2xl font-black text-background">
                     Product Visual
                   </p>
@@ -98,7 +84,7 @@ const About = () => {
                 key={index}
                 className={`bg-gradient-to-br ${card.gradient} p-8 rounded-3xl border-4 border-foreground shadow-2xl ${card.rotation} hover:rotate-0 hover:scale-105 transition-all duration-300 group`}
               >
-                <div className="text-7xl mb-6 group-hover:animate-bounce-float">
+                <div className="text-7xl mb-6">
                   {card.emoji}
                 </div>
                 <h3 className="text-3xl font-black mb-4 text-background">
@@ -143,7 +129,7 @@ const About = () => {
                   No shortcuts. No artificial sweeteners. No compromise. Just bold, balanced flavors that make you do a double-take when you realize there's no alcohol in your glass.
                 </p>
                 <p className="text-2xl font-black text-foreground">
-                  Because you deserve better than boring. 🦆✨
+                  Because you deserve better than boring.
                 </p>
               </div>
             </div>
@@ -153,12 +139,6 @@ const About = () => {
 
       {/* Join The Team CTA */}
       <section className="py-24 bg-gradient-to-br from-primary via-secondary to-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 text-6xl animate-spin-slow">🦆</div>
-          <div className="absolute bottom-10 right-10 text-6xl animate-spin-slow">🦆</div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl animate-bounce-float">🦆</div>
-        </div>
-        
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-6xl md:text-7xl font-black mb-6 text-background drop-shadow-lg">
@@ -172,12 +152,6 @@ const About = () => {
               <button className="bg-background text-foreground px-12 py-6 rounded-xl text-2xl font-black hover:scale-105 transition-transform duration-200">
                 VIEW OPEN POSITIONS 💼
               </button>
-            </div>
-            
-            <div className="mt-12 flex justify-center gap-6 text-6xl">
-              <span className="animate-bounce-float">🎉</span>
-              <span className="animate-bounce-float animation-delay-200">🦆</span>
-              <span className="animate-bounce-float animation-delay-400">🌟</span>
             </div>
           </div>
         </div>

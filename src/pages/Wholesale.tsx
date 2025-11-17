@@ -19,7 +19,6 @@ export default function Wholesale() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <div className="text-8xl mb-6 bounce-float">🦆💼</div>
           <h1 className="text-6xl md:text-8xl font-black mb-6 text-foreground">
             WHOLESALE PARTNERS
           </h1>
