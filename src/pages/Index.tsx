@@ -8,6 +8,7 @@ import { ValuePropositions } from "@/components/ValuePropositions";
 import { HowItsMade } from "@/components/HowItsMade";
 import { SocialProof } from "@/components/SocialProof";
 import { Footer } from "@/components/Footer";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const Index = () => {
   useEffect(() => {
@@ -56,6 +57,7 @@ const Index = () => {
       <HowItsMade />
       <SocialProof />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
