@@ -73,21 +73,35 @@ export const Footer = () => {
 
           {/* Footer links */}
           <div className="text-center space-y-4">
-            <div className="flex flex-wrap justify-center gap-6 text-lg font-bold">
-              <a href="#" className="hover:text-primary transition-colors">
+            <div className="flex flex-wrap justify-center gap-6 text-lg font-bold mb-4">
+              <a href="/about" className="hover:text-primary transition-colors">
                 About Us
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="/shop" className="hover:text-primary transition-colors">
                 Shop
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="/store-locator" className="hover:text-primary transition-colors">
                 Store Locator
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                FAQ
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="/contact" className="hover:text-primary transition-colors">
                 Contact
+              </a>
+              <a href="/wholesale" className="hover:text-primary transition-colors">
+                Wholesale
+              </a>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4 text-sm font-bold opacity-75">
+              <a href="/terms" className="hover:text-primary transition-colors">
+                Terms of Service
+              </a>
+              <a href="/privacy" className="hover:text-primary transition-colors">
+                Privacy Policy
+              </a>
+              <a href="/returns" className="hover:text-primary transition-colors">
+                Returns & Refunds
+              </a>
+              <a href="/shipping" className="hover:text-primary transition-colors">
+                Shipping Policy
               </a>
             </div>
             <p className="text-sm opacity-75">
