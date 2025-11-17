@@ -30,19 +30,70 @@ export const Hero = () => {
         {/* Main headline */}
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            rotate: [-2, -1, -2.5, -1.5, -2],
+          }}
+          transition={{ 
+            delay: 0.3,
+            rotate: {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
           className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-foreground mb-6 sm:mb-8 leading-[1.1] sm:leading-none px-2 sm:px-4"
           style={{
             textShadow: "3px 3px 0px rgba(0,0,0,0.2)",
-            transform: "rotate(-2deg)",
           }}
         >
-          MARGARITAS.
+          <motion.span
+            animate={{ 
+              scale: [1, 1.02, 1],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="inline-block"
+          >
+            MARGARITAS.
+          </motion.span>
           <br />
-          <span className="text-primary">BUT MAKE IT</span>
+          <motion.span 
+            className="text-primary inline-block"
+            animate={{ 
+              y: [0, -5, 0],
+              scale: [1, 1.03, 1],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.3
+            }}
+          >
+            BUT MAKE IT
+          </motion.span>
           <br />
-          <span className="text-accent">SOBER.</span>
+          <motion.span 
+            className="text-accent inline-block"
+            animate={{ 
+              y: [0, -8, 0],
+              rotate: [0, 2, -2, 0],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.6
+            }}
+          >
+            SOBER.
+          </motion.span>
         </motion.h1>
 
         {/* CTAs */}
