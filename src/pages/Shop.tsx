@@ -10,7 +10,6 @@ import { motion } from "framer-motion";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore, CartItem } from "@/stores/cartStore";
 import { toast } from "sonner";
-import { FloatingCartBadge } from "@/components/FloatingCartBadge";
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -55,7 +54,6 @@ const Shop = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <FloatingCartBadge />
 
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden rainbow-gradient">
